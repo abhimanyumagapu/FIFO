@@ -5,23 +5,8 @@ The write pointer always points to the next word to be written; therefore, on re
 which also happens to be the next FIFO word location to be written. On a FIFO-write operation, the memory location that is pointed to by the
 write pointer is written, and then the write pointer is incremented to point to the next location to be written.
 
-The FIFO operates under conditions where its state can be interpreted based on the relationship between its read and write pointers. 
-When both pointers are equal, it indicates two potential states: either the FIFO is empty after a reset operation 
-or the read pointer has caught up to the write pointer, signifying that the last word has been read from the FIFO.
-Conversely, when the read and write pointers are equal, the FIFO can also be considered full. 
-This happens when the write pointer wraps around and reaches the position of the read pointer, indicating that the FIFO has no more available 
-space for new data. To distinguish between the empty and full states when the pointers are equal, 
-a common design technique involves adding an extra bit to each pointer. 
-This additional bit allows tracking of the number of wraps or cycles the pointers have made around the FIFO's address space.
-When the write pointer increments past the final address of the FIFO, it toggles the unused MSB (Most Significant Bit), 
-effectively indicating a wrap-around. Similarly, the read pointer behaves in the same manner when it wraps around the FIFO's address space.
-
-To determine whether the FIFO is empty or full:
-Compare the MSBs of the read and write pointers.
-If the MSBs are different, it signifies that the write pointer has wrapped around one more time than the read pointer, indicating the FIFO is not empty but potentially full.
-If the MSBs are the same, both pointers have wrapped the same number of times, implying either the FIFO is empty or full depending on other conditions (such as the presence of additional flags or counters).
-This method ensures that the state of the FIFO (empty, partially full, or full) can be reliably determined even when the read and write pointers appear equal, thereby facilitating efficient management of data flow within the FIFO structure.
-
 A gray code pointer is used because it is easier to synchronise into the write and read domains.
 The read pointer is synchronised into the write domain using a two flip flop synchroniser and is 
 compared with the next write pointer to determine the full condition.
+
+Reference - http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf
