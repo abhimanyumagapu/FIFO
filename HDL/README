@@ -8,5 +8,6 @@ write pointer is written, and then the write pointer is incremented to point to 
 A gray code pointer is used because it is easier to synchronise into the write and read domains.
 The read pointer is synchronised into the write domain using a two flip flop synchroniser and is 
 compared with the next write pointer to determine the full condition.
+The empty condtion is similarly checked by synchronising the write pointer to the read domain.
 
 Reference - http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf
