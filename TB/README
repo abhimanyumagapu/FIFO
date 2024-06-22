@@ -1,0 +1,10 @@
+The testbench generates random values of winc and rinc- basically the write and read enable signals.
+It also generates random data to be written into the fifo.
+The read and write speeds are different.
+Once data has been written, it is pushed into a dynamic array, where it is popped out when the data is read.
+The read data is compared with the popped data to determine a match.
+The error count is displayed at the end.
+
+
+
+The testbench is still a little buggy, if you have any recommendations to improve the tb, please feel free to create a pull request.
