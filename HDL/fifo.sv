@@ -143,7 +143,7 @@ module wr_ptr_full #(parameter ADDRSIZE = 4)(wrptr, rd_syncptr, wraddr, wrfull, 
   assign wrbinnext = wrbin + (wrrinc && ~wr_full);
   assign wrgraynext = (wrbinnext >> 1) ^ wrbinnext;
 
-  assign wr_full = (wrgraynext == {~rd_syncptr[ADDRSIZE: ADDRSIZE-1], rd_syncptr[ADDRSIZE-2 : 0]});
+  assign wr_full = (wrgraynext == {~rd_syncptr[ADDRSIZE], rd_syncptr[ADDRSIZE-1 : 0]});
 
   always @(posedge wrclk)begin
     if(!wrrst)
